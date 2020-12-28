@@ -1,2 +1,2 @@
 # coddy by loadycode
-# full-featured code editor
+## full-featured code editor
