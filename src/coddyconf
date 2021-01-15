@@ -1,0 +1,24 @@
+// background color
+#444444
+// text color
+white
+// bottom panel color
+silver
+// cursor color
+orange
+// font family and size
+Consolas 10
+// side panel color
+silver
+// side panel text color
+black
+// bottom panel text color
+black
+// separator style
+-
+// icon
+icon.ico
+// side panel
+False
+// bottom panel
+True
