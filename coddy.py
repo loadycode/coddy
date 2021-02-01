@@ -6,6 +6,8 @@
 ftypesImportError=False
 pluginsysImportError=False
 
+# cloth dwarf relief east version guide connect device fatigue reward frequent real
+
 import tkinter as tk
 import tkinter.filedialog as fd
 try:import coddy_ftypes as ftypes
