@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 ### coddy by loadycode
-### build310121 31-01-2021 19:55
+### build310121 01-02-2021 15:44
 ### gnu general public license v3.0
 
 ftypesImportError=False
 pluginsysImportError=False
 
 import tkinter as tk
+import tkinter.ttk as ttk
 import tkinter.filedialog as fd
 try:import coddy_ftypes as ftypes
 except ImportError:ftypesImportError=True
@@ -35,9 +36,9 @@ def file_save(event):
 		open('coddy/config','wt').write(textbox.get('1.0','end'))
 	else:
 		if ftypesImportError==False:
-			file_path=fd.Open(window,filetypes=ftypes.array).show()
+			file_path=fd.SaveAs(window,filetypes=ftypes.array).show()
 		else:
-			file_path=fd.Open(window,filetypes=[('all filetypes','*')]).show()
+			file_path=fd.SaveAs(window,filetypes=[('all filetypes','*')]).show()
 		if file_path=='':return
 		open(file_path,'wt').write(textbox.get('1.0','end'))
 	file_edit=False
@@ -45,9 +46,9 @@ def file_save(event):
 def file_saveas(event):
 	global file_path, file_edit, ftypesImportError
 	if ftypesImportError==False:	
-		file_path=fd.Open(window,filetypes=ftypes.array).show()
+		file_path=fd.SaveAs(window,filetypes=ftypes.array).show()
 	else:
-		file_path=fd.Open(window,filetypes=[('all filetypes','*')]).show()
+		file_path=fd.SaveAs(window,filetypes=[('all filetypes','*')]).show()
 	if file_path=='':return
 	open(file_path,'wt').write(textbox.get('1.0','end'))
 	file_edit=False
@@ -55,13 +56,15 @@ def file_saveas(event):
 ## user interface
 
 window=tk.Tk()
+style=ttk.Style()
+style.theme_use('clam')
 window.title("coddy")
 window.minsize(700,400)
 
 # bindings -->
 window.bind('<Control-o>',file_open)
 window.bind('<Control-s>',file_save)
-window.bind('<Control-Alt-s>',file_saveas)
+window.bind('<Control-x>',file_saveas)
 # <-- bindings
 
 textbox=tk.Text(
@@ -71,6 +74,7 @@ textbox=tk.Text(
         undo=True,
         bg='#444444',
         fg='silver',
+		font='Consolas 9',
         insertbackground='orange'
         )
 textbox.pack(
@@ -90,7 +94,8 @@ verscroll.pack(
         side='right'
         )
 def gui_launch():
-    window.geometry('700x400+50+50')
-    window.mainloop()
+	window.geometry('700x400+50+50')
+	textbox.insert('1.0',open('coddy/startpage').read())
+	window.mainloop()
 
 if __name__=='__main__':gui_launch()
