@@ -7,7 +7,6 @@ ftypesImportError=False
 pluginsysImportError=False
 
 import tkinter as tk
-import tkinter.ttk as ttk
 import tkinter.filedialog as fd
 try:import coddy_ftypes as ftypes
 except ImportError:ftypesImportError=True
@@ -56,8 +55,6 @@ def file_saveas(event):
 ## user interface
 
 window=tk.Tk()
-style=ttk.Style()
-style.theme_use('clam')
 window.title("coddy")
 window.minsize(700,400)
 
@@ -72,7 +69,7 @@ textbox=tk.Text(
         relief='flat',
 		wrap='none',
         undo=True,
-        bg='#444444',
+        bg='#222222',
         fg='silver',
 		font='Consolas 9',
         insertbackground='orange'
