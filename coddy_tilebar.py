@@ -1,5 +1,5 @@
 ### coddy_tilebar for coddy by loadycode
-### v0.9a build060221
+### v0.9b build130221
 ### gnu general public license v3.0
 
 import tkinter as tk
@@ -77,7 +77,7 @@ def launch(window):
 	tile=tk.Frame(
 		window,
 		height=40,
-		bg="white"
+		bg="#222222"
 		)
 	tile.bind("<B1-Motion>",moving)
 	tile.bind("<Button-1>",clickpos)
@@ -89,7 +89,8 @@ def launch(window):
 		tile,
 		text="coddy",
 		justify="center",
-		bg="white",
+		bg="#222222",
+		fg="white",
 		font="Consolas 10"
 		)
 	tilelabel.bind("<B1-Motion>",moving)
