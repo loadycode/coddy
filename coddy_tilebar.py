@@ -1,5 +1,5 @@
-### coddy_tilebar for coddy by loadycode
-### v0.9b build130221
+### coddy by loadycode
+### graphite00001
 ### gnu general public license v3.0
 
 import tkinter as tk

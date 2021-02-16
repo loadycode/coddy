@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 ### coddy by loadycode
-### v0.9b build130221
+### graphite00001
 ### gnu general public license v3.0
 
 ftypesImportError=False
@@ -38,7 +38,7 @@ else:pass
 ## filesystem operations
 
 file_extension=None
-file_syntax='cpp'
+file_syntax='text'
 file_path=None
 file_edit=False
 file_startpage=True
@@ -54,12 +54,6 @@ def file_edit_event(event):
 		syntax.cpp_check(textbox)
 	file_edit=True
 	try:
-		if file_startpage==True:
-			if tilebarImportError==True:
-				window.title('startpage - coddy')
-			else:
-				tilebar.rename('startpage - coddy')
-		else:
 			if file_path!=None:
 				if tilebarImportError==True:
 					window.title('# '+os.path.basename(file_path)+' - coddy')
@@ -173,6 +167,18 @@ def file_open(event):
 		file_syntax='python'
 		syntax.python_check(textbox)
 		syntaxbtn['text']='python'
+	elif file_extension=='.as':
+		file_syntax='actionscript'
+		syntax.actionscript_check(textbox)
+		syntaxbtn['text']='actionscript'
+	elif file_extension=='.c':
+		file_syntax='c'
+		syntax.c_check(textbox)
+		syntaxbtn['text']='c lang'
+	elif file_extension=='.cpp':
+		file_syntax='cpp'
+		syntax.cpp_check(textbox)
+		syntaxbtn['text']='c++ lang'
 	file_startpage=False
 	try:
 		if tilebarImportError==True:
@@ -363,7 +369,7 @@ textbox.pack(
     )
 verscroll=tk.Scrollbar(
     window,
-    bg='gray',
+    background='gray',
 	relief='flat',
     width=15,
 	command=textbox.yview
