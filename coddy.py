@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 ### coddy by loadycode
-### graphite00001
+### graphite00010 v0.91
 ### gnu general public license v3.0
 
 ftypesImportError=False
@@ -13,6 +13,7 @@ syntaxImportError=False
 import os
 import tkinter as tk
 import tkinter.filedialog as fd
+from tkinter import ttk
 try:
 	import coddy_ftypes as ftypes
 except ImportError:
@@ -150,6 +151,10 @@ def file_new(event):
 			tilebar.rename('untitled - coddy')
 		file_path=None
 	file_startpage=False
+	verscroll.pack(
+    	fill='y',
+    	side='right'
+    )
 def file_open(event):
 	global file_path, file_edit, ftypesImportError, file_extension, file_syntax
 	if ftypesImportError==False:	
@@ -180,6 +185,10 @@ def file_open(event):
 		syntax.cpp_check(textbox)
 		syntaxbtn['text']='c++ lang'
 	file_startpage=False
+	verscroll.pack(
+    	fill='y',
+    	side='right'
+    )
 	try:
 		if tilebarImportError==True:
 			window.title(os.path.basename(file_path)+' - coddy')
@@ -212,6 +221,10 @@ def file_save(event):
 	if file_syntax=='python':
 		syntax.python_check(textbox)
 	file_startpage=False
+	verscroll.pack(
+    	fill='y',
+    	side='right'
+    )
 	try:
 		if tilebarImportError==True:
 			window.title(os.path.basename(file_path)+' - coddy')
@@ -236,6 +249,10 @@ def file_saveas(event):
 	if file_syntax=='python':
 		syntax.python_check(textbox)
 	file_startpage=False
+	verscroll.pack(
+    	fill='y',
+    	side='right'
+    )
 	try:
 		if tilebarImportError==True:
 			window.title(os.path.basename(file_path)+' - coddy')
@@ -252,6 +269,10 @@ def file_saveas(event):
 
 def config_open(event):
 	file_startpage=False
+	verscroll.pack(
+    	fill='y',
+    	side='right'
+    )
 	file_path='coddy/config'
 	textbox['state']='normal'
 	textbox.delete('1.0','end')
@@ -369,16 +390,11 @@ textbox.pack(
     )
 verscroll=tk.Scrollbar(
     window,
-    background='gray',
 	relief='flat',
     width=15,
 	command=textbox.yview
     )
 textbox['yscrollcommand']=verscroll.set
-verscroll.pack(
-    fill='y',
-    side='right'
-    )
 def gui_launch():
 	window.geometry('700x400+50+50')
 	textbox.insert('1.0',open('coddy/startpage').read())
