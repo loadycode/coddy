@@ -1,5 +1,5 @@
 ### coddy by loadycode
-### graphite00010 v0.91
+### graphite00015
 ### gnu general public license v3.0
 
 print('coddy!alert: filetypes array import successful')

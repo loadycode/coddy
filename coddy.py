@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 ### coddy by loadycode
-### graphite00010 v0.91
+### graphite00015
 ### gnu general public license v3.0
 
 ftypesImportError=False
@@ -47,8 +47,6 @@ file_startpage=True
 def file_edit_event(event):
 	if file_syntax=='python':
 		syntax.python_check(textbox)
-	elif file_syntax=='actionscript':
-		syntax.actionscript_check(textbox)
 	elif file_syntax=='c':
 		syntax.c_check(textbox)
 	elif file_syntax=='cpp':
@@ -57,14 +55,14 @@ def file_edit_event(event):
 	try:
 			if file_path!=None:
 				if tilebarImportError==True:
-					window.title('# '+os.path.basename(file_path)+' - coddy')
+					window.title(os.path.basename(file_path)+' - coddy')
 				else:
-					tilebar.rename('# '+os.path.basename(file_path)+' - coddy')
+					tilebar.rename(os.path.basename(file_path)+' - coddy')
 			else:
 				if tilebarImportError==True:
-					window.title('# untitled - coddy')
+					window.title('untitled - coddy')
 				else:
-					tilebar.rename('# untitled - coddy')
+					tilebar.rename('untitled - coddy')
 	except TypeError:
 		window.title('error - coddy')
 		print('coddy!error: unknown title error')
@@ -301,7 +299,7 @@ def syntax_switch(event):
 ## user interface
 
 window=tk.Tk()
-window.title("coddy")
+window.title('coddy')
 window.minsize(700,400)
 
 # bindings -->
@@ -325,6 +323,7 @@ textbox=tk.Text( # textbox
 	font='Consolas 10',
     insertbackground='orange'
     )
+syntax.tokens_init(textbox)
 panel=tk.Frame( # bottom panel
 	window,
 	bg='#222222',

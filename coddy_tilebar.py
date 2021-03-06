@@ -1,5 +1,5 @@
 ### coddy by loadycode
-### graphite00010 v0.91
+### graphite00015
 ### gnu general public license v3.0
 
 import tkinter as tk
@@ -29,7 +29,7 @@ def launch(window):
 		if isMapped==1:
 			set_appwindow(window)
 		isMapped=0
-	window.bind("<Map>",mapped)
+	window.bind('<Map>',mapped)
 	window.overrideredirect(True)
 	screenwidth=window.winfo_screenwidth()
 	screenheight=window.winfo_screenheight()
@@ -50,7 +50,7 @@ def launch(window):
 	def maximise(event):
 		global isMaximised
 		if isMaximised==False:
-			window.geometry("{}x{}+{}+{}".format(
+			window.geometry('{}x{}+{}+{}'.format(
 				window.winfo_screenwidth(),
 				window.winfo_screenheight(),
 				0,
@@ -59,7 +59,7 @@ def launch(window):
 			)
 			isMaximised=True
 		else:
-			window.geometry("{}x{}+{}+{}".format(
+			window.geometry('{}x{}+{}+{}'.format(
 				700,
 				400,
 				50,
@@ -73,59 +73,59 @@ def launch(window):
 		clicky=event.y
 	def moving(event):
 		x,y=event.x-clickx+window.winfo_x(),event.y-clicky+window.winfo_y()
-		window.geometry("+%s+%s"%(x,y))
+		window.geometry('+%s+%s'%(x,y))
 	tile=tk.Frame(
 		window,
 		height=40,
-		bg="#222222"
+		bg='#222222'
 		)
-	tile.bind("<B1-Motion>",moving)
-	tile.bind("<Button-1>",clickpos)
+	tile.bind('<B1-Motion>',moving)
+	tile.bind('<Button-1>',clickpos)
 	tile.pack(
-		side="top",
-		fill="x"
+		side='top',
+		fill='x'
 		)
 	tilelabel=tk.Label(
 		tile,
-		text="coddy",
-		justify="center",
-		bg="#222222",
-		fg="white",
-		font="Consolas 10"
+		text='coddy',
+		justify='center',
+		bg='#222222',
+		fg='white',
+		font='Consolas 10'
 		)
-	tilelabel.bind("<B1-Motion>",moving)
-	tilelabel.bind("<Button-1>",clickpos)
+	tilelabel.bind('<B1-Motion>',moving)
+	tilelabel.bind('<Button-1>',clickpos)
 	tilelabel.pack(
-		side="left"
+		side='left'
 		)
 	tileclose=tk.Frame(
 		tile,
 		height=25,
 		width=25,
-		bg="red"
+		bg='red'
 		)
-	tileclose.bind("<Button-1>",close)
+	tileclose.bind('<Button-1>',close)
 	tileclose.pack(
-		side="right"
+		side='right'
 		)
 	tilemax=tk.Frame(
 		tile,
 		height=25,
 		width=25,
-		bg="green"
+		bg='green'
 		)
-	tilemax.bind("<Button-1>",maximise)
+	tilemax.bind('<Button-1>',maximise)
 	tilemax.pack(
-		side="right"
+		side='right'
 		)
 	tilemin=tk.Frame(
 		tile,
 		height=25,
 		width=25,
-		bg="blue"
+		bg='blue'
 		)
-	tilemin.bind("<Button-1>",minimise)
-	tilemin.pack(side="right")
+	tilemin.bind('<Button-1>',minimise)
+	tilemin.pack(side='right')
 	minimise(1)
 	set_appwindow(window)
 def rename(label):
