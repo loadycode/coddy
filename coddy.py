@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 ### coddy by loadycode
-### graphite00015
+### graphite00020
 ### gnu general public license v3.0
 
 ftypesImportError=False
@@ -51,6 +51,12 @@ def file_edit_event(event):
 		syntax.c_check(textbox)
 	elif file_syntax=='cpp':
 		syntax.cpp_check(textbox)
+	elif file_syntax=='javascript':
+		syntax.js_check(textbox)
+	elif file_syntax=='html':
+		syntax.html_check(textbox)
+	elif file_syntax=='css':
+		syntax.css_check(textbox)
 	file_edit=True
 	try:
 			if file_path!=None:
@@ -170,10 +176,10 @@ def file_open(event):
 		file_syntax='python'
 		syntax.python_check(textbox)
 		syntaxbtn['text']='python'
-	elif file_extension=='.as':
-		file_syntax='actionscript'
-		syntax.actionscript_check(textbox)
-		syntaxbtn['text']='actionscript'
+	elif file_extension=='.js':
+		file_syntax='javascript'
+		syntax.js_check(textbox)
+		syntaxbtn['text']='javascript'
 	elif file_extension=='.c':
 		file_syntax='c'
 		syntax.c_check(textbox)
@@ -182,6 +188,14 @@ def file_open(event):
 		file_syntax='cpp'
 		syntax.cpp_check(textbox)
 		syntaxbtn['text']='c++ lang'
+	elif file_extension=='.html':
+		file_syntax='html'
+		syntax.html_check(textbox)
+		syntaxbtn['text']='html'
+	elif file_extension=='.css':
+		file_syntax='css'
+		syntax.css_check(textbox)
+		syntaxbtn['text']='css'
 	file_startpage=False
 	verscroll.pack(
     	fill='y',
@@ -364,7 +378,7 @@ syntaxbtn=tk.Label( # syntax button
 	panel,
 	bg='#222222',
 	fg='white',
-	text='plain text'
+	text=''
 	)
 newbtn.bind('<Button-1>',file_new)
 newbtn.pack(side='left')

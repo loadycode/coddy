@@ -1,5 +1,5 @@
 ### coddy by loadycode
-### graphite00015
+### graphite00020
 ### gnu general public license v3.0
 
 import tkinter as tk
