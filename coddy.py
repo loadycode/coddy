@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 ### coddy by loadycode
-### graphite00020
+### graphite00030
 ### gnu general public license v3.0
 
 ftypesImportError=False
-pluginsysImportError=False
 windllImportError=False
 tilebarImportError=False
 syntaxImportError=False
@@ -45,18 +44,19 @@ file_edit=False
 file_startpage=True
 
 def file_edit_event(event):
-	if file_syntax=='python':
-		syntax.python_check(textbox)
-	elif file_syntax=='c':
-		syntax.c_check(textbox)
-	elif file_syntax=='cpp':
-		syntax.cpp_check(textbox)
-	elif file_syntax=='javascript':
-		syntax.js_check(textbox)
-	elif file_syntax=='html':
-		syntax.html_check(textbox)
-	elif file_syntax=='css':
-		syntax.css_check(textbox)
+	if syntaxImportError!=True:
+		if file_syntax=='python':
+			syntax.python_check(textbox)
+		elif file_syntax=='c':
+			syntax.c_check(textbox)
+		elif file_syntax=='cpp':
+			syntax.cpp_check(textbox)
+		elif file_syntax=='javascript':
+			syntax.js_check(textbox)
+		elif file_syntax=='html':
+			syntax.html_check(textbox)
+		elif file_syntax=='css':
+			syntax.css_check(textbox)
 	file_edit=True
 	try:
 			if file_path!=None:
@@ -174,7 +174,7 @@ def file_open(event):
 	file_extension=os.path.splitext(file_basename)[1]
 	if file_extension=='.py':
 		file_syntax='python'
-		syntax.python_check(textbox)
+		if syntaxImportError!=True:syntax.python_check(textbox)
 		syntaxbtn['text']='python'
 	elif file_extension=='.js':
 		file_syntax='javascript'
@@ -259,7 +259,7 @@ def file_saveas(event):
 	open(file_path,'wt').write(textbox.get('1.0','end'))
 	file_edit=False
 	if file_syntax=='python':
-		syntax.python_check(textbox)
+		if syntaxImportError!=True:syntax.python_check(textbox)
 	file_startpage=False
 	verscroll.pack(
     	fill='y',
@@ -337,7 +337,7 @@ textbox=tk.Text( # textbox
 	font='Consolas 10',
     insertbackground='orange'
     )
-syntax.tokens_init(textbox)
+if syntaxImportError!=True:syntax.tokens_init(textbox)
 panel=tk.Frame( # bottom panel
 	window,
 	bg='#222222',
@@ -410,7 +410,8 @@ verscroll=tk.Scrollbar(
 textbox['yscrollcommand']=verscroll.set
 def gui_launch():
 	window.geometry('700x400+50+50')
-	textbox.insert('1.0',open('coddy/startpage').read())
+	try:textbox.insert('1.0',open('coddy/startpage').read())
+	except FileNotFoundError:print('coddy!error: cant load startpage')
 	textbox['state']='disabled'
 	window.bind('<<Modified>>',file_edit_event)
 	window.mainloop()
