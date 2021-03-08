@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 ### coddy by loadycode
-### graphite00030
+### graphite00040
 ### gnu general public license v3.0
 
 ftypesImportError=False
@@ -44,6 +44,7 @@ file_edit=False
 file_startpage=True
 
 def file_edit_event(event):
+	global file_startpage
 	if syntaxImportError!=True:
 		if file_syntax=='python':
 			syntax.python_check(textbox)
@@ -59,15 +60,31 @@ def file_edit_event(event):
 			syntax.css_check(textbox)
 	file_edit=True
 	try:
+		if file_startpage==True:
 			if file_path!=None:
 				if tilebarImportError==True:
 					window.title(os.path.basename(file_path)+' - coddy')
 				else:
+					window.title(os.path.basename(file_path)+' - coddy')
+					tilebar.rename(os.path.basename(file_path)+' - coddy')
+			else:
+				if tilebarImportError==True:
+					window.title('startpage - coddy')
+				else:
+					window.title('startpage - coddy')
+					tilebar.rename('startpage - coddy')
+		else:
+			if file_path!=None:
+				if tilebarImportError==True:
+					window.title(os.path.basename(file_path)+' - coddy')
+				else:
+					window.title(os.path.basename(file_path)+' - coddy')
 					tilebar.rename(os.path.basename(file_path)+' - coddy')
 			else:
 				if tilebarImportError==True:
 					window.title('untitled - coddy')
 				else:
+					window.title('untitled - coddy')
 					tilebar.rename('untitled - coddy')
 	except TypeError:
 		window.title('error - coddy')
@@ -91,6 +108,7 @@ def file_new(event):
 		if tilebarImportError==True:
 			window.title('untitled - coddy')
 		else:
+			window.title('untitled - coddy')
 			tilebar.rename('untitled - coddy')
 		dialog.destroy()
 		file_path=None
@@ -101,6 +119,7 @@ def file_new(event):
 		if tilebarImportError==True:
 			window.title('untitled - coddy')
 		else:
+			window.title('untitled - coddy')
 			tilebar.rename('untitled - coddy')
 		dialog.destroy()
 		file_path=None
@@ -152,6 +171,7 @@ def file_new(event):
 		if tilebarImportError==True:
 			window.title('untitled - coddy')
 		else:
+			window.title('untitled - coddy')
 			tilebar.rename('untitled - coddy')
 		file_path=None
 	file_startpage=False
@@ -205,11 +225,13 @@ def file_open(event):
 		if tilebarImportError==True:
 			window.title(os.path.basename(file_path)+' - coddy')
 		else:
+			window.title(os.path.basename(file_path)+' - coddy')
 			tilebar.rename(os.path.basename(file_path)+' - coddy')
 	except TypeError:
 		if tilebarImportError==True:
 			window.title('error - coddy')
 		else:
+			window.title('error - coddy')
 			tilebar.rename('error - coddy')
 		print('coddy!error: unknown title error')
 
@@ -241,11 +263,13 @@ def file_save(event):
 		if tilebarImportError==True:
 			window.title(os.path.basename(file_path)+' - coddy')
 		else:
+			window.title(os.path.basename(file_path)+' - coddy')
 			tilebar.rename(os.path.basename(file_path)+' - coddy')
 	except TypeError:
 		if tilebarImportError==True:
 			window.title('error - coddy')
 		else:
+			window.title('error - coddy')
 			tilebar.rename('error - coddy')
 		print('coddy!error: unknown title error')
 
@@ -269,11 +293,13 @@ def file_saveas(event):
 		if tilebarImportError==True:
 			window.title(os.path.basename(file_path)+' - coddy')
 		else:
+			window.title(os.path.basename(file_path)+' - coddy')
 			tilebar.rename(os.path.basename(file_path)+' - coddy')
 	except TypeError:
 		if tilebarImportError==True:
 			window.title('error - coddy')
 		else:
+			window.title('error - coddy')
 			tilebar.rename('error - coddy')
 		print('coddy!error: unknown title error')
 

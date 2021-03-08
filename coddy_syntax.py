@@ -1,5 +1,5 @@
 ### coddy by loadycode
-### graphite00020
+### graphite00040
 ### gnu general public license v3.0
 
 pygmentImportError=False
