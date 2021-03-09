@@ -2,9 +2,9 @@
 ### graphite00050
 ### gnu general public license v3.0
 
-print('coddy!alert: filetypes array import successful')
+print ('coddy!alert: filetypes array import successful')
 
-array=[
+array = [
 	('all filetypes','*'),
 	('python (.py)','*.py*'),
 	('javascript (.js)','*.js'),

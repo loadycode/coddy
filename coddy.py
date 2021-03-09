@@ -3,14 +3,17 @@
 ### graphite00050
 ### gnu general public license v3.0
 
-ftypesImportError=False
-windllImportError=False
-tilebarImportError=False
-syntaxImportError=False
+ftypesImportError = False
+windllImportError = False
+tilebarImportError = False
+syntaxImportError = False
+modsysImportError = False
+import_errors = 0
+import_warns = 0
 
 ## imports
 import sys
-sys.path.append('src/')
+sys.path.append ('src/')
 import os
 import tkinter as tk
 import tkinter.filedialog as fd
@@ -18,79 +21,91 @@ from tkinter import ttk
 try:
 	import coddy_ftypes as ftypes
 except ImportError:
-	ftypesImportError=True
-	print('coddy!error: filetypes array import error')
+	ftypesImportError = True
+	print ('coddy!error: filetypes array import error')
+	import_errors += 1
 try:
 	from ctypes import windll
 except ImportError:
-	windllImportError=True
-	print('coddy!alert: cant import windll; please install windows')
+	windllImportError = True
+	print ('coddy!alert: cant import windll; please install windows')
+	import_warns += 1
 try:
 	import coddy_syntax as syntax
 except ImportError:
-	syntaxImportError=True
-	print('coddy!error: syntax highlighting lib import error')
-if windllImportError==False:
+	syntaxImportError = True
+	print ('coddy!error: syntax highlighting lib import error')
+	import_errors += 1
+if windllImportError == False:
 	try:
 		import coddy_tilebar as tilebar
 	except ImportError:
-		tilebarImportError=True
-		print('coddy!error: custom tilebar lib import error')
+		tilebarImportError = True
+		print ('coddy!error: custom tilebar lib import error')
+		import_warns += 1
 else:pass
+try:
+	import coddy_modsys as modsys
+except ImportError:
+	modsysImportError = True
+	print ('coddy!error: module system lib import error')
+	import_errors += 1
+print ('errors: ' + str (import_errors) + ' warnings: ' + str (import_warns))
+
 ## filesystem operations
 
-file_extension=None
-file_syntax='text'
-file_path=None
-file_edit=False
-file_startpage=True
+file_extension = None
+file_syntax = 'text'
+file_path = None
+file_edit = False
+file_startpage = True
 
-def file_edit_event(event):
+def file_edit_event (event):
 	global file_startpage
-	if syntaxImportError!=True:
-		if file_syntax=='python':
-			syntax.python_check(textbox)
-		elif file_syntax=='c':
-			syntax.c_check(textbox)
-		elif file_syntax=='cpp':
-			syntax.cpp_check(textbox)
-		elif file_syntax=='javascript':
-			syntax.js_check(textbox)
-		elif file_syntax=='html':
-			syntax.html_check(textbox)
-		elif file_syntax=='css':
-			syntax.css_check(textbox)
-	file_edit=True
+	if syntaxImportError != True:
+		if file_syntax == 'python':
+			syntax.python_check (textbox)
+		elif file_syntax == 'c':
+			syntax.c_check (textbox)
+		elif file_syntax == 'cpp':
+			syntax.cpp_check (textbox)
+		elif file_syntax == 'javascript':
+			syntax.js_check (textbox)
+		elif file_syntax == 'html':
+			syntax.html_check (textbox)
+		elif file_syntax == 'css':
+			syntax.css_check (textbox)
+	file_edit = True
 	try:
-		if file_startpage==True:
-			if file_path!=None:
-				if tilebarImportError==True:
-					window.title(os.path.basename(file_path)+' - coddy')
+		if file_startpage == True:
+			if file_path != None:
+				if tilebarImportError == True:
+					window.title (os.path.basename (file_path) + ' - coddy')
 				else:
-					window.title(os.path.basename(file_path)+' - coddy')
-					tilebar.rename(os.path.basename(file_path)+' - coddy')
+					window.title (os.path.basename (file_path) + ' - coddy')
+					tilebar.rename (os.path.basename (file_path) + ' - coddy')
 			else:
-				if tilebarImportError==True:
-					window.title('startpage - coddy')
+				if tilebarImportError == True:
+					window.title ('startpage - coddy')
 				else:
-					window.title('startpage - coddy')
-					tilebar.rename('startpage - coddy')
+					window.title ('startpage - coddy')
+					tilebar.rename ('startpage - coddy')
 		else:
-			if file_path!=None:
-				if tilebarImportError==True:
-					window.title(os.path.basename(file_path)+' - coddy')
+			if file_path != None:
+				if tilebarImportError == True:
+					window.title (os.path.basename (file_path) + ' - coddy')
 				else:
-					window.title(os.path.basename(file_path)+' - coddy')
-					tilebar.rename(os.path.basename(file_path)+' - coddy')
+					window.title (os.path.basename (file_path) + ' - coddy')
+					tilebar.rename (os.path.basename (file_path) + ' - coddy')
 			else:
-				if tilebarImportError==True:
-					window.title('untitled - coddy')
+				if tilebarImportError == True:
+					window.title ('untitled - coddy')
 				else:
-					window.title('untitled - coddy')
-					tilebar.rename('untitled - coddy')
+					window.title ('untitled - coddy')
+					tilebar.rename ('untitled - coddy')
 	except TypeError:
-		window.title('error - coddy')
-		print('coddy!error: unknown title error')
+		window.title ('error - coddy')
+		print ('coddy!error: unknown title error')
 
 def file_new(event):
 	global edited, file_path
