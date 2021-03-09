@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 ### coddy by loadycode
-### graphite00040
+### graphite00050
 ### gnu general public license v3.0
 
 ftypesImportError=False
@@ -9,6 +9,8 @@ tilebarImportError=False
 syntaxImportError=False
 
 ## imports
+import sys
+sys.path.append('src/')
 import os
 import tkinter as tk
 import tkinter.filedialog as fd
@@ -97,8 +99,8 @@ def file_new(event):
 		file_edit=False
 		if file_path!=None:
 			open(file_path,'wt').write(textbox.get('1.0','end'))
-		elif file_path=='coddy/config':
-			open('coddy/config','wt').write(textbox.get('1.0','end'))
+		elif file_path=='misc/config':
+			open('misc/config','wt').write(textbox.get('1.0','end'))
 		else:
 			file_path=fd.SaveAs(window,filetypes=ftypes.array).show()
 			if file_path=='':return
@@ -242,8 +244,8 @@ def file_save(event):
 			open(file_path,'wt').write(textbox.get('1.0','end'))
 		except FileNotFoundError:
 			file_path=None
-	elif file_path=='coddy/config':
-		open('coddy/config','wt').write(textbox.get('1.0','end'))
+	elif file_path=='misc/config':
+		open('misc/config','wt').write(textbox.get('1.0','end'))
 	else:
 		if ftypesImportError==False:
 			file_path=fd.SaveAs(window,filetypes=ftypes.array).show()
@@ -311,11 +313,11 @@ def config_open(event):
     	fill='y',
     	side='right'
     )
-	file_path='coddy/config'
+	file_path='misc/config'
 	textbox['state']='normal'
 	textbox.delete('1.0','end')
 	try:
-		textbox.insert('1.0',open('coddy/config').read())
+		textbox.insert('1.0',open('misc/config').read())
 	except FileNotFoundError:
 		file_path=None
 		textbox.delete('1.0','end')
@@ -436,7 +438,7 @@ verscroll=tk.Scrollbar(
 textbox['yscrollcommand']=verscroll.set
 def gui_launch():
 	window.geometry('700x400+50+50')
-	try:textbox.insert('1.0',open('coddy/startpage').read())
+	try:textbox.insert('1.0',open('misc/startpage').read())
 	except FileNotFoundError:print('coddy!error: cant load startpage')
 	textbox['state']='disabled'
 	window.bind('<<Modified>>',file_edit_event)
