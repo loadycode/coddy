@@ -9,8 +9,7 @@
 
 ### this minimalistic text editor designed to be simple, fast and powerful
 
-## last changes (090321, graphite00050):
-* improved systax highlighting for python, in particular, concretization and comfortable perception of the code.
-* started work on support for the modules by editor
-* started work on custom tile support for unix systems
-* added examples of code syntax highlighting (see misc/syntax_samples)
+## last changes (100321, graphite00060):
+* added custom config support
+* added JSON syntax highlighting support
+* minor changes

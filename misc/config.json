@@ -1,0 +1,10 @@
+{
+	"textbox": [
+		{
+		"background": "#222222",
+		"foreground": "silver",
+		"font": "Consolas 10",
+		"caret": "orange"
+		}
+	]
+}

@@ -1,5 +1,5 @@
 ### coddy by loadycode
-### graphite00050
+### graphite00060
 ### gnu general public license v3.0
 
 print ('coddy!alert: filetypes array import successful')
@@ -11,5 +11,6 @@ array = [
 	('c language (.c)','*.c'),
 	('c++ language (.cpp)','*.cpp'),
 	('cascade stylesheets (.css)','*.css'),
-	('hypertext markup lang (.html)','*.html')
+	('hypertext markup lang (.html)','*.html'),
+	('json (.json)','.json')
 ]

@@ -1,11 +1,12 @@
 ### coddy by loadycode
-### graphite00050
+### graphite00060
 ### gnu general public license v3.0
 
 pygmentImportError = False
 
 import tkinter as tk
 try:
+	from pygments.lexers import JsonLexer
 	from pygments.lexers import CLexer
 	from pygments.lexers import HtmlLexer
 	from pygments.lexers import CssLexer
@@ -73,6 +74,9 @@ def html_check (textbox):
 	tokens_get (textbox, lexer)
 def css_check (textbox):
 	lexer = CssLexer ()
+	tokens_get (textbox,lexer)
+def json_check (textbox):
+	lexer = JsonLexer ()
 	tokens_get (textbox,lexer)
 def delete_tokens (textbox):
 	for tag in textbox.tag_names ():

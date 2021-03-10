@@ -1,3 +1,9 @@
+# coddy 0.96
+## 100321 graphite00060
+* added custom config support
+* added JSON syntax highlighting support
+* minor changes
+
 # coddy 0.95
 ## 090321 graphite00050
 * improved systax highlighting for python, in particular, concretization and comfortable perception of the code.
