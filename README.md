@@ -1,5 +1,5 @@
 # coddy by loadycode
-## full-featured code editor
+## simple (but powerful) code editor
 
 * minimalistic design
 * syntax highlighting
@@ -9,7 +9,7 @@
 
 ### this minimalistic text editor designed to be simple, fast and powerful
 
-## last changes (100321, graphite00060):
-* added custom config support
-* added JSON syntax highlighting support
-* minor changes
+## last changes (130321, graphite00070):
+* main script exstension changed to .pyw
+* removed syntax examples
+* minor changes and fixes

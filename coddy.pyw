@@ -1,19 +1,22 @@
 #!/usr/bin/python3
 ### coddy by loadycode
-### graphite00060
+### graphite00070
 ### gnu general public license v3.0
+
+## imports and exceptions
 
 jsonImportError = False
 tkinterImportError = False
+themesImportError = False
 ftypesImportError = False
 windllImportError = False
 tilebarImportError = False
 syntaxImportError = False
 modsysImportError = False
+
 import_errors = 0
 import_warns = 0
 
-## imports
 import sys
 sys.path.append ('src/')
 import os
@@ -54,6 +57,13 @@ if windllImportError == False:
 		import coddy_tilebar as tilebar
 	except ImportError:
 		tilebarImportError = True
+		print ('coddy!error: custom tilebar lib import error')
+		import_warns += 1
+if jsonImportError == False:
+	try:
+		import coddy_themes as themes
+	except ImportError:
+		themesImportError = True
 		print ('coddy!error: custom tilebar lib import error')
 		import_warns += 1
 else:pass
@@ -339,8 +349,11 @@ def file_saveas (event):
 
 def config_open (event):
 	try:
+		textbox ['state'] = 'normal'
+		textbox.delete ('1.0', 'end')
 		textbox.insert ('1.0', open ('misc/config.json').read ())
 		file_syntax = 'json'
+		syntaxbtn ['text'] = 'editing config'
 		syntax.json_check (textbox)
 		file_startpage = False
 		verscroll.pack (
@@ -348,8 +361,19 @@ def config_open (event):
     		side = 'right'
     	)
 		file_path = 'misc/config.json'
-		textbox ['state'] = 'normal'
-		textbox.delete ('1.0', 'end')
+		try:
+			if tilebarImportError == True:
+				window.title (os.path.basename (file_path) + ' - coddy')
+			else:
+				window.title (os.path.basename (file_path) + ' - coddy')
+				tilebar.rename (os.path.basename (file_path) + ' - coddy')
+		except TypeError:
+			if tilebarImportError == True:
+				window.title ('error - coddy')
+			else:
+				window.title ('error - coddy')
+				tilebar.rename ('error - coddy')
+			print ('coddy!error: unknown title error')
 	except FileNotFoundError:
 		file_path = None
 		textbox.delete ('1.0', 'end')
@@ -368,25 +392,16 @@ def config_check ():
 			theme_fg = output_variables ['foreground']
 			theme_font = output_variables ['font']
 			theme_caret = output_variables ['caret']
-		theme_restore ()
-		
-def theme_restore():
+		config_update ()
+
+def config_update():
 		textbox ['bg'] = theme_bg
 		textbox ['fg'] = theme_fg
 		textbox ['font'] = theme_font
 		textbox ['insertbackground'] = theme_caret
 
 def syntax_switch (event):
-	global file_syntax
-	if file_syntax == 'python':
-		file_syntax = 'text'
-		syntaxbtn ['text'] = 'plain text'
-		syntax.delete_tokens (textbox)
-	elif file_syntax == 'text':
-		if file_extension == '.py':
-			file_syntax = 'python'
-			syntaxbtn ['text'] = 'python'
-			syntax.python_check (textbox)
+	syntax.switch (file_syntax, syntaxbtn, file_extension, textbox)
 
 ## user interface
 
@@ -452,6 +467,12 @@ confbtn = tk.Label ( # config button
 	fg = 'white',
 	text = 'config'
 	)
+themesbtn = tk.Label ( # themes button
+	panel,
+	bg = '#222222',
+	fg = 'white',
+	text = 'themes'
+	)
 syntaxbtn = tk.Label ( # syntax button
 	panel,
 	bg = '#222222',
@@ -468,6 +489,8 @@ saveasbtn.bind ('<Button-1>', file_saveas)
 saveasbtn.pack (side = 'left')
 confbtn.bind ('<Button-1>', config_open)
 confbtn.pack (side = 'left')
+themesbtn.bind ('<Button-1>', themes.change)
+themesbtn.pack (side = 'left')
 syntaxbtn.bind ('<Button-1>', syntax_switch)
 syntaxbtn.pack (side = 'right')
 panel.pack (

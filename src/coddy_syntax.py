@@ -1,5 +1,5 @@
 ### coddy by loadycode
-### graphite00060
+### graphite00070
 ### gnu general public license v3.0
 
 pygmentImportError = False
@@ -39,6 +39,7 @@ token_type_to_tag = {
 		Token.Comment.Hashbang: 'comment',
 		Token.Comment.Multiline: 'comment',
 }
+
 def tokens_init (textbox):
 	textbox.tag_config ('keyword', foreground = color_keyword)
 	textbox.tag_config ('keyword_ext', foreground = color_keyword_ext)
@@ -57,27 +58,109 @@ def tokens_get (textbox, lexer):
 		j = i + len (token)
 		if token_type in token_type_to_tag: textbox.tag_add (token_type_to_tag [token_type], get_text_coord (s, i), get_text_coord (s, j))
 	textbox.edit_modified (0)
+
 def python_check (textbox):
 	lexer = PythonLexer ()
 	tokens_get (textbox, lexer)
+
 def c_check (textbox):
 	lexer = CLexer ()
 	tokens_get (textbox, lexer)
+
 def cpp_check (textbox):
 	lexer = CppLexer ()
 	tokens_get (textbox, lexer)
+
 def js_check (textbox):
 	lexer = JavascriptLexer ()
 	tokens_get (textbox, lexer)
+
 def html_check (textbox):
 	lexer = HtmlLexer ()
 	tokens_get (textbox, lexer)
+
 def css_check (textbox):
 	lexer = CssLexer ()
 	tokens_get (textbox,lexer)
+
 def json_check (textbox):
 	lexer = JsonLexer ()
 	tokens_get (textbox,lexer)
+
 def delete_tokens (textbox):
 	for tag in textbox.tag_names ():
 		textbox.tag_remove (tag, 1.0, 'end')
+
+def switch (file_syntax, syntaxbtn, file_extension, textbox):
+	switched = False
+	if file_syntax == 'python':
+		file_syntax = 'text'
+		syntaxbtn ['text'] = 'plain text'
+		delete_tokens (textbox)
+		switched = True
+	elif file_syntax == 'json':
+		file_syntax = 'text'
+		syntaxbtn ['text'] = 'plain text'
+		delete_tokens (textbox)
+		switched = True
+	elif file_syntax == 'c':
+		file_syntax = 'text'
+		syntaxbtn ['text'] = 'plain text'
+		delete_tokens (textbox)
+		switched = True
+	elif file_syntax == 'cpp':
+		file_syntax = 'text'
+		syntaxbtn ['text'] = 'plain text'
+		delete_tokens (textbox)
+		switched = True
+	elif file_syntax == 'html':
+		file_syntax = 'text'
+		syntaxbtn ['text'] = 'plain text'
+		delete_tokens (textbox)
+		switched = True
+	elif file_syntax == 'css':
+		file_syntax = 'text'
+		syntaxbtn ['text'] = 'plain text'
+		delete_tokens (textbox)
+		switched = True
+	elif file_syntax == 'javascript':
+		file_syntax = 'text'
+		syntaxbtn ['text'] = 'plain text'
+		delete_tokens (textbox)
+		switched = True
+	elif switched == True:
+		if file_extension == '.py':
+			file_syntax = 'python'
+			syntaxbtn ['text'] = 'python'
+			python_check (textbox)
+			switched = False
+		elif file_extension == '.c':
+			file_syntax = 'c'
+			syntaxbtn ['text'] = 'c lang'
+			c_check (textbox)
+			switched = False
+		elif file_extension == '.cpp':
+			file_syntax = 'cpp'
+			syntaxbtn ['text'] = 'cpp lang'
+			cpp_check (textbox)
+			switched = False
+		elif file_extension == '.json':
+			file_syntax = 'json'
+			syntaxbtn ['text'] = 'json'
+			json_check (textbox)
+			switched = False
+		elif file_extension == '.html':
+			file_syntax = 'html'
+			syntaxbtn ['text'] = 'html'
+			html_check (textbox)
+			switched = False
+		elif file_extension == '.css':
+			file_syntax = 'css'
+			syntaxbtn ['text'] = 'css'
+			css_check (textbox)
+			switched = False
+		elif file_extension == '.js':
+			file_syntax = 'javascript'
+			syntaxbtn ['text'] = 'javascript'
+			js_check (textbox)
+			switched = False
